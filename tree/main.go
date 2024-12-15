@@ -17,13 +17,13 @@ func ChekInp() (int, error) {
 	}
 }
 
-type Tree struct {
+type Node struct {
 	val   int
-	left  *Tree
-	right *Tree
+	left  *Node
+	right *Node
 }
 
-func (t *Tree) Insert(value int) error {
+func (t *Node) Insert(value int) error {
 	if t == nil {
 		return errors.New("Tree is nil")
 	}
@@ -33,7 +33,7 @@ func (t *Tree) Insert(value int) error {
 
 	if t.val > value {
 		if t.left == nil {
-			t.left = &Tree{val: value}
+			t.left = &Node{val: value}
 			return nil
 		}
 		return t.left.Insert(value)
@@ -41,7 +41,7 @@ func (t *Tree) Insert(value int) error {
 
 	if t.val < value {
 		if t.right == nil {
-			t.right = &Tree{val: value}
+			t.right = &Node{val: value}
 			return nil
 		}
 		return t.right.Insert(value)
@@ -67,21 +67,21 @@ func (t *Tree) Insert(value int) error {
 // }
 // }
 
-func (t *Tree) FindMin() int {
+func (t *Node) FindMin() int {
 	if t.left == nil {
 		return t.val
 	}
 	return t.left.FindMin()
 }
 
-func (t *Tree) FindMax() int {
+func (t *Node) FindMax() int {
 	if t.right == nil {
 		return t.val
 	}
 	return t.right.FindMax()
 }
 
-func (t *Tree) PrintTree() {
+func (t *Node) PrintTree() {
 	if t == nil {
 		return
 	}
@@ -91,20 +91,20 @@ func (t *Tree) PrintTree() {
 }
 
 func main() {
-	var t Tree
 	fmt.Println("Write the number of tree elements")
 	number, err := ChekInp()
 	if err != nil {
 		fmt.Println(err)
-		err = nil
+		return
 	}
 	fmt.Println("Write elements")
+	var t Node
 	for i := number; i != 0; i-- {
 		var value int
 		value, err = ChekInp()
 		if err != nil {
 			fmt.Println(err)
-			err = nil
+			return
 		}
 		t.Insert(value)
 	}
