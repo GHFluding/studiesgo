@@ -98,7 +98,7 @@ func main() {
 		return
 	}
 	fmt.Println("Write elements")
-	var t Node
+	t := new(Node)
 	for i := number; i != 0; i-- {
 		var value int
 		value, err = ChekInp()
